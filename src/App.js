@@ -12,6 +12,7 @@ class App extends React.Component {
 
     this.addTask = this.addTask.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
+    this.removeTask = this.removeTask.bind(this);
   }
 
   addTask(e) {
@@ -36,6 +37,15 @@ class App extends React.Component {
     });
   }
 
+  removeTask(id) {
+    console.log(`calling removeTask on id ${id}`);
+    this.setState({
+      tasks: this.state.tasks.filter( (task) => {
+        return task.id !== id;
+      })
+    });
+  }
+
   render() {
     return (
       <div>
@@ -44,7 +54,7 @@ class App extends React.Component {
           <input type="text" id="task-input" value={this.state.inputValue} onChange={this.inputChanged} />
           <button type="submit">Add task</button>
         </form>
-        <Overview list={this.state.tasks} />
+        <Overview list={this.state.tasks} removeTask={this.removeTask} />
       </div>
     )
   }
