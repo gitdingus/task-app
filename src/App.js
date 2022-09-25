@@ -12,10 +12,11 @@ class App extends React.Component {
 
     this.addTask = this.addTask.bind(this);
     this.inputChanged = this.inputChanged.bind(this);
-    this.cancelSubmit = this.cancelSubmit.bind(this);
   }
 
-  addTask() {
+  addTask(e) {
+    e.preventDefault();
+
     this.setState((prevState) => {
       const { tasks } = prevState;
       const newTask = {};
@@ -26,7 +27,8 @@ class App extends React.Component {
       tasks.push(newTask);
       return {
         tasks,
-      }
+        inputValue: '',
+      };
     });
   }
 
@@ -36,21 +38,13 @@ class App extends React.Component {
     });
   }
 
-  cancelSubmit(e) {
-    e.preventDefault();
-
-    this.setState({
-      inputValue: ''
-    });
-  }
-
   render() {
     return (
       <div>
-        <form onSubmit={this.cancelSubmit} className="task-input-form">
+        <form onSubmit={this.addTask} className="task-input-form">
           <label htmlFor="task-input">New Task</label>
           <input type="text" id="task-input" value={this.state.inputValue} onChange={this.inputChanged} />
-          <button type="submit" onClick={this.addTask}>Add task</button>
+          <button type="submit">Add task</button>
         </form>
         <Overview list={this.state.tasks} />
       </div>
