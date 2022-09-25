@@ -38,7 +38,6 @@ class App extends React.Component {
   }
 
   removeTask(id) {
-    console.log(`calling removeTask on id ${id}`);
     this.setState({
       tasks: this.state.tasks.filter( (task) => {
         return task.id !== id;
