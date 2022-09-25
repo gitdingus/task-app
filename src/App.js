@@ -18,15 +18,13 @@ class App extends React.Component {
     e.preventDefault();
 
     this.setState((prevState) => {
-      const { tasks } = prevState;
       const newTask = {};
 
-      newTask.id = tasks.length + 1;
+      newTask.id = prevState.tasks.length + 1;
       newTask.task = this.state.inputValue;
 
-      tasks.push(newTask);
       return {
-        tasks,
+        tasks: prevState.tasks.concat([newTask]),
         inputValue: '',
       };
     });
