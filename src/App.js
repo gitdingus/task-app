@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 import Overview from './components/Overview';
 
 class App extends React.Component {
@@ -21,7 +22,7 @@ class App extends React.Component {
     this.setState((prevState) => {
       const newTask = {};
 
-      newTask.id = prevState.tasks.length + 1;
+      newTask.id = uuid();
       newTask.task = this.state.inputValue;
 
       return {
